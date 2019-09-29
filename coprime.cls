@@ -1,6 +1,6 @@
 %%==============================================================================================================
 
-%% This class has a copywrite to Coprime --- Ver : 2.00
+%% This class has a copywrite to Coprime --- Ver : 2.01
 %% Email Address : almagest0328@gmail.com
 %% Encoded by UTF-8
 %
@@ -79,10 +79,10 @@
 % LaTeX Format and Define Class Name
 \NeedsTeXFormat{LaTeX2e}
 \RequirePackage{expl3, xparse, l3keys2e}
-\ProvidesExplClass {coprime} {2019/07/22} {2.00} {Copywrite to Coprime}
+\ProvidesExplClass {coprime} {2019/09/29} {2.01} {Copywrite to Coprime}
 
 % Define Version Constant
-\tl_const:Nn \c__current_version_tl {2.00}
+\tl_const:Nn \c__current_version_tl {2.01}
 
 %Declare Booleans
 \bool_new:N \g_custom_titlepage_bool
