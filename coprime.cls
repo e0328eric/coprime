@@ -73,6 +73,7 @@
 %% Ver 1.25 : 19/07/20 --- Fix some issues when using LuaTeX engine
 %
 %% Ver 2.00 : 19/07/22 --- Remake class to work well when using LuaTeX
+%% Ver 2.01 : 19/09/29 --- Fix a bug when using reference environment and PHD command
 %===============================================================================================================
 
 % LaTeX Format and Define Class Name
@@ -441,7 +442,7 @@
 				title={##3},
 				author={##4},
 				year={##5},
-				chapter={##6}
+				chapter={##6},
 				publisher={##7},
 				##8}
 			}
@@ -487,7 +488,7 @@
 			author={##3},
 			year={##4},
 			school={##5},
-			##3}
+			##6}
 		}
 	}
 	\NDC{\misc}{mmmO{}}{%
