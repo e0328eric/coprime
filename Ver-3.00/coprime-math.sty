@@ -248,14 +248,8 @@
     {\mbox{}\overset{}{\rightarrow}}
     {\mbox{}\overset{\raisebox{-1.7pt}{\scriptsize${#1}$}}{\rightarrow}}
 }
-\sys_if_engine_pdftex:TF
-{
-    \def\defeq{\coloneqq}
-}
-{
-    \let\olddefeq\defeq
-    \let\defeq\coloneqq
-}
+\def\uniform{\rightrightarrows}
+\def\defeq{\coloneqq}
 \let\normaleq\trianglelefteq
 \let\normal\vartriangleleft
 \let\oldC\C
