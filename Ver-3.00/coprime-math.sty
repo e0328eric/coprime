@@ -25,15 +25,15 @@
 % Raise Error when the tex engine is not either pdf or lua
 \sys_if_engine_ptex:T
 {
-	\ClassError{coprime}{Use~'pdftex'~or~'luatex'~engine}{}
+    \ClassError{coprime}{Use~'pdftex'~or~'luatex'~engine}{}
 }
 \sys_if_engine_uptex:T
 {
-	\ClassError{coprime}{Use~'pdftex'~or~'luatex'~engine}{}
+    \ClassError{coprime}{Use~'pdftex'~or~'luatex'~engine}{}
 }
 \sys_if_engine_xetex:T
 {
-	\ClassError{coprime}{Use~'pdftex'~or~'luatex'~engine}{}
+    \ClassError{coprime}{Use~'pdftex'~or~'luatex'~engine}{}
 }
 
 %Import Basic math Packages
@@ -65,7 +65,8 @@
 {
     \bool_if:NTF \g_nostix_math_bool
     {%
-	\DMO*{\bigcupdot}{%
+	\DMO*{\bigcupdot}
+	{%
 	    \ooalign{\hfil$\displaystyle\bigcup$\hfil\cr%
 	    \hfil\raise-.4ex\hbox{\larger[3]$\cdot$}\raise-1.17ex\hbox{}\hfil\cr}
 	}
@@ -89,7 +90,8 @@
     \RequirePackage[math-style=ISO]{unicode-math}
     \bool_if:NTF \g_nostix_math_bool
     {
-	\DMO*{\bigcupdot}{%
+	\DMO*{\bigcupdot}
+	{%
 	    \ooalign{\hfil$\displaystyle\bigcup$\hfil\cr%
 	    \hfil\raise-.4ex\hbox{\larger[3]$\cdot$}\raise-1.17ex\hbox{}\hfil\cr}
 	}
@@ -109,7 +111,25 @@
 }
 
 \newcommand{\cl}[1]{\overline{#1}}
-\newcommand{\proved}{\ifmmode \tag*{$\Box$}\else\null\hfill $\Box$\fi}
+\newcommand{\@proved}{\ifmmode \tag*{$\Box$}\else\null\hfill $\Box$\fi}
+\newcommand{\@@proved}{\ifmmode \tag*{$\QED$}\else\null\hfill $\QED$\fi}
+\newcommand{\@@@proved}{\ifmmode \tag*{$////$}\else\null\hfill $////$\fi}
+\NewDocumentCommand{\proved}{ss}
+{%
+    \IfBooleanTF{#1}
+    {%
+	\IfBooleanTF{#2}
+	{%
+	    \@@@proved
+	}
+	{%
+	    \@@proved
+	}
+    }
+    {%
+	\@proved
+    }
+}
 \renewcommand{\complement}[1]{{#1}^{\mathsf{c}}}
 \newcommand{\comp}[1]{{#1}^{\mathsf{c}}}
 \newcommand{\contradiction}{\ifmmode(\downzigzagarrow)\else$(\downzigzagarrow)$\fi}
@@ -185,9 +205,10 @@
     \tl_set:Nn \l_change_cs_tl {#4}
     \tl_replace_all:Nnn \l_change_cs_tl {,} {&}
     \sys_if_engine_luatex:TF
-    {
+    {%
 	\tl_replace_all:Nnn \l_change_cs_tl {;} {\\[6pt]}
-    }{
+    }
+    {%
 	\tl_replace_all:Nnn \l_change_cs_tl {;} {\\}
     }
     \IfBooleanTF{#1}

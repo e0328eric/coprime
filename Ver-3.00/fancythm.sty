@@ -41,30 +41,18 @@
 % \fancyon and \fancyoff commands
 \def\fancyon{\use@fancythmtrue}
 \def\fancyoff{\use@fancythmfalse}
-
-% Tikz and expl3 make a parsing error. So the command \ExplSyntaxOff comes out
 \ExplSyntaxOff
 
-% Define some lengths
 \newlength{\thmtitlewidth}
 \newlength{\thmtitlewidthtmp}
-
-% Define \@proof command in global
 \def\@proof{\relax}
-
-% Define remark, counterexample and tem proof theorems
 \theoremstyle{remark}
 \newtheorem*{@pf}{proof}
 \newtheorem*{@counter}{counterexample}
 \newtheorem*{@remark}{remark}
-
-% Define newtheorem style when fancythm is disabled
 \newtheoremstyle{named}{\topsep}{\topsep}{\itshape}{}{\bfseries}{.}{.5em}{\thmnumber{#2} \thmnote{#3}}
 \theoremstyle{named}
-% Define namedthm
 \newtheorem{namedthm}{Theorem}[section]
-
-% Define nonfancytheorem style
 \theoremstyle{plain}
 	\def\do#1{%
 	    \newcounter{#1}[section]
