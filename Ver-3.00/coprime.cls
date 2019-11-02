@@ -131,7 +131,7 @@
 \hfuzz=1000pt
 
 %Declare Options
-\keys_define:nn {coprime-main-option}
+\keys_define:nn {coprime-main-options}
 {
     %fancythm .bool_set:N = \g_fancythm_bool,
     fontsize .code:n = {\dim_set:Nn \font_size_dim {#1}},
@@ -157,12 +157,12 @@
     13pt .code:n = {\dim_set:Nn \font_size_dim {13pt}},
 }
 
-\keys_set:nn {coprime-main-option}
+\keys_set:nn {coprime-main-options}
 {
     version = \c__current_version_tl,
 }
 
-\ProcessKeysOptions{coprime-main-option}
+\ProcessKeysOptions{coprime-main-options}
 
 %reqno vs leqno
 \bool_if:NTF \g_leqno_bool
@@ -194,7 +194,7 @@
 {
     \bool_if:NTF \g_nostix_bool
     {
-        \RequirePackage[nobreak,nositx]{coprime-math}
+        \RequirePackage[nobreak,nostix]{coprime-math}
     }
     {
         \RequirePackage[nobreak]{coprime-math}
@@ -203,7 +203,7 @@
 {
     \bool_if:NTF \g_nostix_bool
     {
-        \RequirePackage[nositx]{coprime-math}
+        \RequirePackage[nostix]{coprime-math}
     }
     {
         \RequirePackage{coprime-math}
