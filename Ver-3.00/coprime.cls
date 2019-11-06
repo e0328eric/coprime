@@ -222,37 +222,6 @@
 \bool_if:NT \g_korean_bool
 {%
     \RequirePackage{kotex}
-    \sys_if_engine_xetex:T
-    {
-        \setmainhangulfont{Noto Serif CJK KR}[
-            Scale=0.98,
-            AutoFakeSlant,
-            Script=Hangul,
-            Language=Korean,
-            LocalForms=On,
-            UprightFont=* Light,
-            BoldFont=* Bold,
-            InterLatinCJK=.125em,
-            Expansion, Protrusion,
-        ]
-        \setsanshangulfont{Noto Sans CJK KR}[
-            Scale=0.98,
-            Script=Hangul,
-            Language=Korean,
-            UprightFont=* DemiLight,
-            BoldFont=* Bold,
-            InterLatinCJK=.125em,
-        ]
-        \setmathhangulfont{Noto Sans CJK KR}[
-            Script=Hangul,
-            Language=Korean,
-            SizeFeatures={
-                {Size=-6,  Font=* Medium},
-                {Size=6-9, Font=* Regular},
-                {Size=9-,  Font=* DemiLight},
-            },
-        ]
-    }
 }
 
 
