@@ -88,7 +88,7 @@
 }
 {
     \RequirePackage{fontspec}
-    \RequirePackage[math-style=ISO]{unicode-math}
+    \RequirePackage[math-style=TeX]{unicode-math}
     \bool_if:NTF \g_nostix_math_bool
     {
 	\DMO*{\bigcupdot}
@@ -105,7 +105,6 @@
     }
     {
 	\setmainfont{STIX Two Text}
-	\setsansfont{Noto Sans CJK KR}
 	\setmathfont[StylisticSet=8]{STIX Two Math}
 	\renewenvironment{cases}{\left\{\begin{matrix}}{\end{matrix}\right.}
     }
