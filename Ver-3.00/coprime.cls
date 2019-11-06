@@ -1,6 +1,6 @@
 %%==============================================================================================================
 
-%% This class has a copywrite to Coprime --- Ver : 1.00
+%% This class has a copywrite to Coprime --- Ver : 3.01
 %% Email Address : almagest0328@gmail.com
 %% Encoded by UTF-8
 %
@@ -50,41 +50,42 @@
 %
 %% Ver 3.30b : 18/12/15 --- Make a new command : \Matrix
 %
-%% Ver 4.00b: 18/12/19 --- Change the class with LaTeX3 Language. Class name is changed and fancythm fixed
-%% Ver 4.01b: 18/12/29 --- Add stix2-type 1 font, delete mathabx font
-%% Ver 4.02b: 19/01/05 --- Fixed \usegeometry, \setbabel and \sethyperlink issues
+%% Ver 0.00: 18/12/19 --- Change the class with LaTeX3 Language. Class name is changed and fancythm fixed
+%% Ver 0.01: 18/12/29 --- Add stix2-type 1 font, delete mathabx font
+%% Ver 0.02: 19/01/05 --- Fixed \usegeometry, \setbabel and \sethyperlink issues
 %
-%% Ver 4.10b: 19/01/21 --- Can be used in LuaTeX but not XeTeX
-%% Ver 4.11b: 19/01/23 --- Fix the issue when using hyperlink option
-%% Ver 4.12b: 19/02/22 --- Edit the \Matrix command
+%% Ver 0.10: 19/01/21 --- Can be used in LuaTeX but not XeTeX
+%% Ver 0.11: 19/01/23 --- Fix the issue when using hyperlink option
+%% Ver 0.12: 19/02/22 --- Edit the \Matrix command
 %
-%% Ver 5.00b: 19/02/25 --- Major Update!
+%% Ver 1.00: 19/02/25 --- Major Update!
 %
-%% Ver 5.10b: 19/02/28 --- Make the titlepage
-%% Ver 5.11b: 19/03/06 --- Fix bugs.
-%% Ver 5.12b: 19/03/15 --- Delete hangul and hanja options
+%% Ver 1.10: 19/02/28 --- Make the titlepage
+%% Ver 1.11: 19/03/06 --- Fix bugs.
+%% Ver 1.12: 19/03/15 --- Delete hangul and hanja options
 %
-%% Ver 5.20b: 19/03/17 --- Add reference environment to use bibtex easely
-%% Ver 5.21b: 19/03/22 --- Fix the bug when .bib file made although the reference environment
+%% Ver 1.20: 19/03/17 --- Add reference environment to use bibtex easely
+%% Ver 1.21: 19/03/22 --- Fix the bug when .bib file made although the reference environment
 %	        	   does not active and change the default code of \Matrix command
-%% Ver 5.22b: 19/03/28 --- Add etoolbox package which makes command more efficiently
-%% Ver 5.23b: 19/04/16 --- Edit fancythm style
-%% Ver 5.24b: 19/06/24 --- Fix some issues of fancythm style
-%% Ver 5.25b: 19/07/20 --- Fix some issues when using LuaTeX engine
+%% Ver 1.22: 19/03/28 --- Add etoolbox package which makes command more efficiently
+%% Ver 1.23: 19/04/16 --- Edit fancythm style
+%% Ver 1.24: 19/06/24 --- Fix some issues of fancythm style
+%% Ver 1.25: 19/07/20 --- Fix some issues when using LuaTeX engine
 %
-%% Ver 6.00b: 19/07/22 --- Remake class to work well when using LuaTeX
+%% Ver 2.00: 19/07/22 --- Remake class to work well when using LuaTeX
 %
-%% Ver 1.00 : 19/10/24 --- Huge Updates!
+%% Ver 3.00 : 19/10/24 --- Huge Updates!
+%% Ver 3.01 : 19/11/06 --- Change latex engine to run coprime. XeTeX is work but LuaTex isn't
 
 %===============================================================================================================
 
 % LaTeX Format and Define Class Name
 \NeedsTeXFormat{LaTeX2e}
 \RequirePackage{expl3, xparse, l3keys2e}
-\ProvidesExplClass {coprime} {2019/10/24} {1.00} {Copywrite to Coprime}
+\ProvidesExplClass {coprime} {2019/11/06} {3.01} {Copywrite to Coprime}
 
 % Define Version Constant
-\tl_const:Nn \c__current_version_tl {1.00}
+\tl_const:Nn \c__current_version_tl {3.01}
 
 %Declare Booleans
 \bool_new:N \g_custom_titlepage_bool
@@ -176,17 +177,17 @@
 % Raise Error when the tex engine is not either pdf or lua
 \sys_if_engine_ptex:T
 {
-    \ClassError{coprime}{Use~'pdftex'~or~'luatex'~engine}{}
+    \ClassError{coprime}{Use~'pdftex'~or~'xetex'~engine}{}
 }
 
 \sys_if_engine_uptex:T
 {
-    \ClassError{coprime}{Use~'pdftex'~or~'luatex'~engine}{}
+    \ClassError{coprime}{Use~'pdftex'~or~'xetex'~engine}{}
 }
 
-\sys_if_engine_xetex:T
+\sys_if_engine_luatex:T
 {
-    \ClassError{coprime}{Use~'pdftex'~or~'luatex'~engine}{}
+    \ClassError{coprime}{Use~'pdftex'~or~'xetex'~engine}{}
 }
 
 % Import some packages
@@ -209,10 +210,6 @@
         \RequirePackage{coprime-math}
     }
 }
-\sys_if_engine_luatex:T
-{
-    \RequirePackage{luacode}
-}
 
 \RequirePackage{coprime-reference}
 \RequirePackage{anyfontsize}
@@ -225,7 +222,7 @@
 \bool_if:NT \g_korean_bool
 {%
     \RequirePackage{kotex}
-    \sys_if_engine_luatex:T
+    \sys_if_engine_xetex:T
     {
         \setmainhangulfont{Noto Serif CJK KR}[
             Scale=0.98,
