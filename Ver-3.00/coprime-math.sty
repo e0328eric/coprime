@@ -7,6 +7,7 @@
 %
 %% Ver 1.00 : 19/09/28 --- To manage simply, this package was made
 %% Ver 1.01 : 19/11/06 --- Cannot use LuaTeX engine. But XeTeX engine can be used.
+%% Ver 1.02 : 19/11/14 --- Add another font.
 
 %%================================================================================================================
 
@@ -20,6 +21,7 @@
 {
     nobreak .bool_set:N = \g_nobreak_math_bool,
     nostix .bool_set:N = \g_nostix_math_bool,
+    pagella .bool_set:N = \g_pagella_math_bool,
 }
 \ProcessKeysOptions{coprime-math-options}
 
@@ -80,15 +82,19 @@
 	\let\emptyset\varnothing
     }
     {%
+    \bool_if:NTF \g_pagella_math_bool
+    {%
+	\ClassError{Use~XeTeX.}{Use~XeTeX.}
+    }
+    {%
 	\RequirePackage[upint]{stix2}
 	\let\oldemptyset\emptyset
 	\let\emptyset\varnothing
 	\renewenvironment{cases}{\left\{\begin{matrix}}{\end{matrix}\right.}
     }
+    }
 }
 {
-    \RequirePackage{fontspec}
-    \RequirePackage[math-style=TeX]{unicode-math}
     \bool_if:NTF \g_nostix_math_bool
     {
 	\DMO*{\bigcupdot}
@@ -101,19 +107,31 @@
 	\newcommand{\upint}{\overline{\int}\hskip-1.5pt\nullint}
 	\newcommand{\lowint}{\underline{\int}\hskip-1.5pt\nullint}
 	\RequirePackage{mathrsfs, euscript, dsfont}
-	\setmainfont[Ligatures=TeX]{Linux Libertine O}
+	\let\oldemptyset\emptyset
+	\let\emptyset\varnothing
     }
     {
+    \bool_if:NTF \g_pagella_math_bool
+    {
+	\RequirePackage{fontspec}
+	\RequirePackage[math-style=TeX]{unicode-math}
+	\setmainfont{TeX Gyre Pagella}
+	\setmathfont{TeX Gyre Pagella Math}
+    }
+    {
+	\RequirePackage{fontspec}
+	\RequirePackage[math-style=TeX]{unicode-math}
 	\setmainfont{STIX Two Text}
 	\setmathfont[StylisticSet=8]{STIX Two Math}
 	\renewenvironment{cases}{\left\{\begin{matrix}}{\end{matrix}\right.}
+    }
     }
 }
 
 \newcommand{\cl}[1]{\overline{#1}}
 \newcommand{\@proved}{\ifmmode \tag*{$\Box$}\else\null\hfill $\Box$\fi}
-\newcommand{\@@proved}{\ifmmode \tag*{$\QED$}\else\null\hfill $\blacksquare$\fi}
-\newcommand{\@@@proved}{\ifmmode \tag*{$////$}\else\null\hfill $\blacklozenge$\fi}
+\newcommand{\@@proved}{\ifmmode \tag*{$\blacksquare$}\else\null\hfill $\blacksquare$\fi}
+\newcommand{\@@@proved}{\ifmmode \tag*{$\blacklozenge$}\else\null\hfill $\blacklozenge$\fi}
 \NewDocumentCommand{\proved}{ss}
 {%
     \IfBooleanTF{#1}
