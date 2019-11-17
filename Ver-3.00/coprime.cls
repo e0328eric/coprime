@@ -144,8 +144,7 @@
     leqno .bool_set:N = \g_leqno_bool,
     multicol .bool_set:N = \g_multicol_bool,
     nobreak .bool_set:N = \g_nobreak_bool,
-    nostix .bool_set:N = \g_nostix_bool,
-    pagella .bool_set:N = \g_pagella_bool,
+    stix .bool_set:N = \g_stix_bool,
     table .bool_set:N = \g_table_bool,
     tcolorbox .bool_set:N = \g_tcolorbox_bool,
     tikz .bool_set:N = \g_tikz_bool,
@@ -189,33 +188,22 @@
 % Import some packages
 \bool_if:NTF \g_nobreak_bool
 {
-    \bool_if:NTF \g_nostix_bool
+    \bool_if:NTF \g_stix_bool
     {
-        \RequirePackage[nobreak,nostix]{coprime-math}
+        \RequirePackage[nobreak,stix]{coprime-math}
     }
     {
-        \bool_if:NTF \g_pagella_bool
-        {
-            \RequirePackage[nobreak,pagella]{coprime-math}
-        }
-        {
-            \RequirePackage[nobreak]{coprime-math}
-        }
+        \RequirePackage[nobreak]{coprime-math}
     }
 }
 {
-    \bool_if:NTF \g_nostix_bool
+    \bool_if:NTF \g_stix_bool
     {
-        \RequirePackage[nostix]{coprime-math}
+        \RequirePackage[stix]{coprime-math}
     }
     {
-        \bool_if:NTF \g_pagella_bool
-        {
-            \RequirePackage[pagella]{coprime-math}
-        }
-        {
-            \RequirePackage{coprime-math}
-        }
+    {
+        \RequirePackage{coprime-math}
     }
 }
 

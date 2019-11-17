@@ -7,7 +7,6 @@
 %
 %% Ver 1.00 : 19/09/28 --- To manage simply, this package was made
 %% Ver 1.01 : 19/11/06 --- Both XeTeX and LuaTeX can be used
-%% Ver 1.02 : 19/11/14 --- Add another font.
 
 %%================================================================================================================
 
@@ -20,8 +19,7 @@
 \keys_define:nn {coprime-math-options}
 {
     nobreak .bool_set:N = \g_nobreak_math_bool,
-    nostix .bool_set:N = \g_nostix_math_bool,
-    pagella .bool_set:N = \g_pagella_math_bool,
+    stix .bool_set:N = \g_stix_math_bool,
 }
 \ProcessKeysOptions{coprime-math-options}
 
@@ -62,7 +60,13 @@
 % Math Symbol
 \sys_if_engine_pdftex:TF
 {
-    \bool_if:NTF \g_nostix_math_bool
+    \bool_if:NTF \g_stix_math_bool
+    {%
+	\RequirePackage[upint]{stix2}
+	\let\oldemptyset\emptyset
+	\let\emptyset\varnothing
+	\renewenvironment{cases}{\left\{\begin{matrix}}{\end{matrix}\right.}
+    }
     {%
 	\DMO*{\bigcupdot}
 	{%
@@ -77,21 +81,16 @@
 	\let\oldemptyset\emptyset
 	\let\emptyset\varnothing
     }
-    {%
-    \bool_if:NTF \g_pagella_math_bool
-    {%
-	\ClassError{Use~XeTeX.}{Use~XeTeX.}
-    }
-    {%
-	\RequirePackage[upint]{stix2}
-	\let\oldemptyset\emptyset
-	\let\emptyset\varnothing
-	\renewenvironment{cases}{\left\{\begin{matrix}}{\end{matrix}\right.}
-    }
-    }
 }
 {
-    \bool_if:NTF \g_nostix_math_bool
+    \bool_if:NTF \g_stix_math_bool
+    {
+	\RequirePackage{fontspec}
+	\RequirePackage[math-style=TeX]{unicode-math}
+	\setmainfont{STIX Two Text}
+	\setmathfont[StylisticSet=8]{STIX Two Math}
+	\renewenvironment{cases}{\left\{\begin{matrix}}{\end{matrix}\right.}
+    }
     {
 	\DMO*{\bigcupdot}
 	{%
@@ -105,22 +104,6 @@
 	\RequirePackage{mathrsfs, euscript, dsfont}
 	\let\oldemptyset\emptyset
 	\let\emptyset\varnothing
-    }
-    {
-    \bool_if:NTF \g_pagella_math_bool
-    {
-	\RequirePackage{fontspec}
-	\RequirePackage[math-style=TeX]{unicode-math}
-	\setmainfont{TeX Gyre Pagella}
-	\setmathfont{TeX Gyre Pagella Math}
-    }
-    {
-	\RequirePackage{fontspec}
-	\RequirePackage[math-style=TeX]{unicode-math}
-	\setmainfont{STIX Two Text}
-	\setmathfont[StylisticSet=8]{STIX Two Math}
-	\renewenvironment{cases}{\left\{\begin{matrix}}{\end{matrix}\right.}
-    }
     }
 }
 
