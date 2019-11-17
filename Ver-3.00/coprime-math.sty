@@ -6,7 +6,7 @@
 %% coprime-math Package, First Release Date : 2019/09/28
 %
 %% Ver 1.00 : 19/09/28 --- To manage simply, this package was made
-%% Ver 1.01 : 19/11/06 --- Cannot use LuaTeX engine. But XeTeX engine can be used.
+%% Ver 1.01 : 19/11/06 --- Both XeTeX and LuaTeX can be used
 %% Ver 1.02 : 19/11/14 --- Add another font.
 
 %%================================================================================================================
@@ -28,15 +28,11 @@
 % Raise Error when the tex engine is not either pdf or lua
 \sys_if_engine_ptex:T
 {
-    \ClassError{coprime}{Use~'pdftex'~or~'xetex'~engine}{}
+    \ClassError{coprime}{Use~'pdftex',~'xetex',~or~'luatex'~engine}{}
 }
 \sys_if_engine_uptex:T
 {
-    \ClassError{coprime}{Use~'pdftex'~or~'xetex'~engine}{}
-}
-\sys_if_engine_luatex:T
-{
-    \ClassError{coprime}{Use~'pdftex'~or~'xetex'~engine}{}
+    \ClassError{coprime}{Use~'pdftex',~'xetex',~or~'luatex'~engine}{}
 }
 
 %Import Basic math Packages

@@ -75,7 +75,7 @@
 %% Ver 2.00: 19/07/22 --- Remake class to work well when using LuaTeX
 %
 %% Ver 3.00 : 19/10/24 --- Huge Updates!
-%% Ver 3.01 : 19/11/06 --- Change latex engine to run coprime. XeTeX is work but LuaTex isn't
+%% Ver 3.01 : 19/11/06 --- Change latex engine to run coprime. XeTeX and LuaTeX works.
 
 %===============================================================================================================
 
@@ -178,17 +178,12 @@
 % Raise Error when the tex engine is not either pdf or lua
 \sys_if_engine_ptex:T
 {
-    \ClassError{coprime}{Use~'pdftex'~or~'xetex'~engine}{}
+    \ClassError{coprime}{Use~'pdftex',~'xetex',~or~'luatex'~engine}{}
 }
 
 \sys_if_engine_uptex:T
 {
-    \ClassError{coprime}{Use~'pdftex'~or~'xetex'~engine}{}
-}
-
-\sys_if_engine_luatex:T
-{
-    \ClassError{coprime}{Use~'pdftex'~or~'xetex'~engine}{}
+    \ClassError{coprime}{Use~'pdftex',~'xetex',~or~'luatex'~engine}{}
 }
 
 % Import some packages
@@ -311,13 +306,13 @@
 \ExplSyntaxOff
 \ifuse@tikz
 	\RequirePackage{tikz, tikz-3dplot, tikz-cd}
-	\usetikzlibrary{intersections, calc, positioning, patterns}
+        \usetikzlibrary{intersections, calc, positioning, patterns, arrows.meta, decorations.markings}
 \fi
 
 %Tcolorbox
 \ifuse@tcolorbox
 	\RequirePackage{tikz, tikz-3dplot, tikz-cd}
-	\usetikzlibrary{intersections, calc, positioning, patterns}
+        \usetikzlibrary{intersections, calc, positioning, patterns, arrows.meta, decorations.markings}
 	\RequirePackage[many]{tcolorbox}
 \fi
 \ExplSyntaxOn
