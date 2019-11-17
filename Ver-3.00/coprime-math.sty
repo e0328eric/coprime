@@ -149,16 +149,16 @@
 \renewcommand{\frak}[1]{\mathfrak{#1}}
 \newcommand{\ds}[1]{\mathds{#1}}
 \newcommand{\bbb}[1]{%
-    \bool_if:NTF \g_nostix_math_bool
+    \bool_if:NTF \g_stix_math_bool
+    {%
+	\mathbb{#1}
+    }
     {%
 	\ifx 1#1
 	    \ds{1}
 	\else
 	    \mathbb{#1}
 	\fi
-    }
-    {%
-	\mathbb{#1}
     }
 }
 

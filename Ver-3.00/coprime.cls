@@ -202,7 +202,6 @@
         \RequirePackage[stix]{coprime-math}
     }
     {
-    {
         \RequirePackage{coprime-math}
     }
 }
