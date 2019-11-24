@@ -198,7 +198,7 @@
 \tl_new:N \l_change_cs_tl
 \tl_new:N \l_type_matrix_tl
 
-\NewDocumentCommand{\Matrix}{>{\ReverseBoolean}soom}{%
+\NewDocumentCommand{\Matrix}{soom}{%
     \tl_set:Nn \l_change_cs_tl {#4}
     \tl_replace_all:Nnn \l_change_cs_tl {,} {&}
     \sys_if_engine_xetex:TF
@@ -208,7 +208,7 @@
     {%
 	\tl_replace_all:Nnn \l_change_cs_tl {;} {\\}
     }
-    \IfBooleanTF{#1}
+    \IfNoValueTF{#3}
     {%
 	\IfNoValueTF{#2}
 	{\tl_set:Nn \l_type_matrix_tl {p}}
@@ -221,10 +221,19 @@
 		\tl_set:Nn \l_type_matrix_tl {#2}
 	    }
 	}
-	\tl_put_right:Nn \l_type_matrix_tl {matrix}
-	\begin{\tl_use:N \l_type_matrix_tl}
-	    \tl_use:N \l_change_cs_tl
-	\end{\tl_use:N \l_type_matrix_tl}
+	\IfBooleanTF{#1}
+	{%
+	    \tl_put_right:Nn \l_type_matrix_tl {smallmatrix*}
+	    \begin{\tl_use:N \l_type_matrix_tl}[c]
+		\tl_use:N \l_change_cs_tl
+	    \end{\tl_use:N \l_type_matrix_tl}
+	}
+	{%
+	    \tl_put_right:Nn \l_type_matrix_tl {matrix}
+	    \begin{\tl_use:N \l_type_matrix_tl}\
+		\tl_use:N \l_change_cs_tl
+	    \end{\tl_use:N \l_type_matrix_tl}
+	}
     }
     {%
 	\tl_if_empty:nTF {#2}
@@ -247,9 +256,17 @@
 		\def\RightDelimeter{#3}
 	    }
 	}
-    \left\LeftDelimeter\begin{matrix}
-	\tl_use:N \l_change_cs_tl
-    \end{matrix}\right\RightDelimeter
+	\IfBooleanTF{#1}
+	{%
+	    \left\LeftDelimeter\begin{smallmatrix*}[c]
+		\tl_use:N \l_change_cs_tl
+	    \end{smallmatrix*}\right\RightDelimeter
+	}
+	{%
+	    \left\LeftDelimeter\begin{matrix}
+		\tl_use:N \l_change_cs_tl
+	    \end{matrix}\right\RightDelimeter
+	}
     }
 }
 
