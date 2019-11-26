@@ -1,12 +1,13 @@
 %%================================================================================================================
 
-%% This package has a copywrite to Coprime --- Ver 1.00
+%% This package has a copywrite to Coprime --- Ver 1.02
 %% Email Address : almagest0328@gmail.com
 %
 %% coprime-math Package, First Release Date : 2019/09/28
 %
 %% Ver 1.00 : 19/09/28 --- To manage simply, this package was made
 %% Ver 1.01 : 19/11/06 --- Both XeTeX and LuaTeX can be used
+%% Ver 1.02 : 19/11/25 --- Fix \Matrix bug and change its definition
 
 %%================================================================================================================
 
@@ -23,7 +24,7 @@
 }
 \ProcessKeysOptions{coprime-math-options}
 
-% Raise Error when the tex engine is not either pdf or lua
+% Raise Error when the tex engine is not either pdf, xe or lua
 \sys_if_engine_ptex:T
 {
     \ClassError{coprime}{Use~'pdftex',~'xetex',~or~'luatex'~engine}{}

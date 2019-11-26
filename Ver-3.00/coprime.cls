@@ -267,21 +267,22 @@
 \NewDocumentCommand{\sethyperlink}{m}{%
 	\bool_set_true:N \g_hyperlink_used_bool
 	\bool_if:NTF \g_hyperlink_bool
-    {%
-        \tl_if_blank:nTF {#1}
         {%
-            \ClassWarning{coprime}{Setting~basic~hyperlink~option~instead.}
+            \tl_if_blank:nTF {#1}
+            {%
+                \ClassWarning{coprime}{Setting~basic~hyperlink~option~instead.}
+            }
+            {%
+                \tl_gset:Nn \tl_Hyperlink_Setup {#1}
+            }
         }
         {%
-            \tl_gset:Nn \tl_Hyperlink_Setup {#1}
+            \ClassError{coprime}
+                {Add~'hyperlink'~option~to~use~this~command}
+                {Add~'hyperlink'~option~to~use~this~command}
         }
-    }
-    {%
-        \ClassError{coprime}
-            {Add~'hyperlink'~option~to~use~this~command}
-            {Add~'hyperlink'~option~to~use~this~command}
-    }
-	\RequirePackage[\tl_use:N \tl_Hyperlink_Setup]{hyperref}
+            \RequirePackage[\tl_use:N \tl_Hyperlink_Setup]{hyperref}
+            \RequirePackage{cleveref}
 }
 %Tikz
 \newif\ifuse@tikz
@@ -555,27 +556,30 @@
 % Setting \AtBeginDocument and \AtEndDocument
 \AtBeginDocument{%
 	\bool_if:NT \g_geometry_bool
-    {%
-        \bool_if:NF \g_geometry_used_bool
         {%
-            \ClassError{coprime}{Where~is~\protect\setgeometry\space command?}%
-                {%
-                    Use~\protect\setgometry\space to~use~"geometry"~option.\MessageBreak
-                    Useage~:~\protect\setgometry{options~of~geometry~package}
-                }
-            }
-    }
-	\bool_if:NT \g_hyperlink_bool
-    {%
-        \bool_if:NF \g_hyperlink_used_bool
-        {%
-            \ClassError{coprime}{Where~is~\protect\sethyperlink\space command?}%
-                {%
-                    Use~\protect\sethyperlink\space to~use~"hyperlink"~option.\MessageBreak
-                    Useage~:~\protect\sethyperlink{options~of~hyperref~package}
+            \bool_if:NF \g_geometry_used_bool
+            {%
+                \ClassError{coprime}{Where~is~\protect\setgeometry\space command?}%
+                    {%
+                        Use~\protect\setgometry\space to~use~"geometry"~option.\MessageBreak
+                        Useage~:~\protect\setgometry{options~of~geometry~package}
+                    }
                 }
         }
-    }
+	\bool_if:NTF \g_hyperlink_bool
+        {%
+            \bool_if:NF \g_hyperlink_used_bool
+            {%
+                \ClassError{coprime}{Where~is~\protect\sethyperlink\space command?}%
+                    {%
+                        Use~\protect\sethyperlink\space to~use~"hyperlink"~option.\MessageBreak
+                        Useage~:~\protect\sethyperlink{options~of~hyperref~package}
+                    }
+            }
+        }
+        {%
+            \RequirePackage{cleveref}
+        }
     \renewcommand{\baselinestretch}{\fp_use:N \baseline_fp}
 	\setlength{\parindent}{\parindent_dim}
 	\title{\vspace*{-20pt}\bf{\textsc{\fontsize{1.3\font_size_dim}{1.2em}\selectfont\tl_use:N \title_tl}}\vspace{-7pt}}
