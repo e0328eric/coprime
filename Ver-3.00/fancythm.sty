@@ -1,0 +1,249 @@
+%%================================================================================================================
+
+%% This package has a copywrite to Coprime --- Ver 1.01
+%% Email Address : almagest0328@gmail.com
+%
+%% fancythm Package, First Release Date : 2019/09/28
+%
+%% Ver 1.00 : 19/09/28 --- To manage simply, this package was made
+%% Ver 1.01 : 19/11/25 --- Delete cleveref package so that fix a bug of coprime.cls
+
+%%================================================================================================================
+
+% LaTeX Format and Define a Package Name
+\NeedsTeXFormat{LaTeX2e}
+\RequirePackage{expl3, xparse, l3keys2e}
+\ProvidesExplPackage {fancythm} {2019/09/28} {1.00} {Copywrite to Coprime}
+
+% Declare Options
+\keys_define:nn {fancythm-options}
+{
+	nosecnum .bool_set:N = \g_nosecnum_bool,
+}
+\ProcessKeysOptions{fancythm-options}
+
+% Import tcolorbox and etoolbox packages
+\RequirePackage{amsthm}
+\RequirePackage[many]{tcolorbox}
+\RequirePackage{etoolbox}
+\RequirePackage{varwidth}
+
+%% Main Stuff
+% Undefine the previous theorems
+\cs_undefine:N \definition
+\cs_undefine:N \theorem
+\cs_undefine:N \proposition
+\cs_undefine:N \lemma
+\cs_undefine:N \corollary
+\cs_undefine:N \proof
+\cs_undefine:N \remark
+\cs_undefine:N \counterexample
+
+% Define Booleans
+\newif\ifuse@fancythm
+\newif\ifuse@@fancythm
+\newif\if@isproved
+
+% \fancyon and \fancyoff commands
+\def\fancyon{\use@fancythmtrue}
+\def\fancyoff{\use@fancythmfalse}
+
+\newlength{\thmtitlewidth}
+\newlength{\thmtitlewidthtmp}
+\def\@proof{\relax}
+\theoremstyle{remark}
+\newtheorem*{@pf}{proof}
+\newtheorem*{@counter}{counterexample}
+\newtheorem*{@remark}{remark}
+\newtheoremstyle{named}{\topsep}{\topsep}{\itshape}{}{\bfseries}{.}{.5em}{\thmnumber{#2} \thmnote{#3}}
+\theoremstyle{named}
+\newtheorem{namedthm}{Theorem}[section]
+\theoremstyle{plain}
+
+\def\do#1{%
+	\bool_if:NTF \g_nosecnum_bool
+	{%
+		\newcounter{#1}
+		\setcounter{#1}{0}
+		\@namedef{the#1}{\arabic{section}.\arabic{#1}}
+	}
+	{%
+		\newcounter{#1}[section]
+		\setcounter{#1}{0}
+		\@namedef{the#1}{\arabic{section}.\arabic{#1}}
+	}
+	\@ifundefined{crefname}
+	{
+		\relax
+	}
+	{
+		\crefname{#1}{\lowercase{#1}}{\lowercase{#1}}
+	}
+	\@ifundefined{Crefname}
+	{
+		\relax
+	}
+	{
+		\Crefname{#1}{#1}{#1}
+	}
+}
+\docsvlist{Definition,Theorem,Proposition,Corollary,Lemma}
+
+\ExplSyntaxOff
+	\NewDocumentEnvironment{defin}{o}{%
+		\refstepcounter{Definition}
+		\ifuse@fancythm
+		\IfNoValueTF{#1}{\def\expl@in{}}{\def\expl@in{#1}}
+		\par
+		\settowidth{\thmtitlewidthtmp}{\expl@in}
+		\addtolength{\thmtitlewidth}{1.2323\thmtitlewidthtmp}
+		\settowidth{\thmtitlewidthtmp}{Definition \theDefinition}
+		\addtolength{\thmtitlewidth}{1.2323\thmtitlewidthtmp}
+		\addtolength{\thmtitlewidth}{16mm}
+		\begin{tcolorbox}[
+		enhanced,breakable,empty,
+		extras unbroken and first={
+		frame code = {%
+		    \draw[line width=0.5mm] ([xshift=-0.25mm]frame.north east)
+			-- ([xshift=-0.25mm,yshift=10.75pt]frame.north east)
+			-- ([xshift=\thmtitlewidth,yshift=10.75pt]frame.north west);
+			}},
+		colframe=black,coltitle=white,
+		colbacktitle=black,borderline west={0.5mm}{0mm}{black},
+		borderline south={0.5mm}{0mm}{black},
+		borderline east={0.5mm}{0mm}{black},
+		attach boxed title to top left={xshift=0mm},
+		left = 1em, right = 1em, top = 4pt, bottom = 4pt, before skip = 5pt,
+		varwidth boxed title,boxed title style={%
+			boxsep=4.5pt,
+			frame code = {\path[tcb fill frame] ([yshift=-2pt]frame.north west) -- ([xshift=-1mm,yshift=-2pt]frame.north east) --
+			    ([xshift=1mm]frame.east)-- ([xshift=-1mm,yshift=2pt]frame.south east) -- ([yshift=2pt]frame.south west) -- cycle;
+			\path ([xshift=3mm]frame.east) node[right] {\large\bfseries\textsf{\expl@in}};}},
+		title = {\large\bfseries\textsf{Definition \theDefinition}}]
+		\else
+		\IfNoValueTF{#1}{\def\expl@in{}}{\def\expl@in{\space({#1})}}
+		\begin{flushleft}
+		{\bfseries Definition \theDefinition}{\expl@in}{\bfseries .}
+		\fi
+	}
+	{%
+		\ifuse@fancythm
+		\end{tcolorbox}
+		\par
+		\else
+		\end{flushleft}
+		\fi
+	}
+
+	\long\def\do#1{\NewDocumentEnvironment{#1}{o}{%
+		\refstepcounter{#1}
+		\let\proof\@proof
+		\ifuse@fancythm
+		\RenewDocumentCommand{\@proof}{O{}}{%
+			\end{tcolorbox}
+			\@isprovedtrue
+			\begin{pf}[####1]
+		}
+		\let\proof\@proof
+		\par
+		\IfNoValueTF{##1}{\def\expl@in{}}{\def\expl@in{##1}}
+		\@isprovedfalse
+		\settowidth{\thmtitlewidthtmp}{\expl@in}
+		\addtolength{\thmtitlewidth}{1.2323\thmtitlewidthtmp}
+		\settowidth{\thmtitlewidthtmp}{#1 \csname the#1\endcsname}
+		\addtolength{\thmtitlewidth}{1.2323\thmtitlewidthtmp}
+		\addtolength{\thmtitlewidth}{16mm}
+		\begin{tcolorbox}[enhanced,breakable,empty,
+		extras unbroken and first={%
+		frame code = {%
+		    \draw[line width=0.5mm] ([xshift=-0.25mm]frame.north east)
+			-- ([xshift=-0.25mm,yshift=10.75pt]frame.north east)
+			-- ([xshift=\thmtitlewidth,yshift=10.75pt]frame.north west);
+			}},
+		colframe=black,coltitle=white,
+		colbacktitle=black,borderline west={0.5mm}{0mm}{black},
+		borderline south={0.5mm}{0mm}{black},
+		borderline east={0.5mm}{0mm}{black},
+		attach boxed title to top left={xshift=0mm},
+		left = 1em, right = 1em, top = 4pt, bottom = 4pt, before skip = 5pt,
+		varwidth boxed title,boxed title style={%
+			boxsep=4.5pt,
+			frame code = {\path[tcb fill frame] ([yshift=-2pt]frame.north west) -- ([xshift=-1mm,yshift=-2pt]frame.north east) --
+			    ([xshift=1mm]frame.east)-- ([xshift=-1mm,yshift=2pt]frame.south east) -- ([yshift=2pt]frame.south west) -- cycle;
+			\path ([xshift=3mm]frame.east) node[right] {\large\bfseries\textsf{\expl@in}};
+			}
+		},
+		title = {\large\bfseries\textsf{#1 \csname the#1\endcsname}}]
+		\else
+		\IfNoValueTF{##1}{\def\expl@in{}}{\def\expl@in{\space({##1})}}
+		\@isprovedfalse
+		\RenewDocumentCommand{\@proof}{O{}}{%
+			\endgroup
+			\end{flushleft}
+			\@isprovedtrue
+			\begin{pf}[####1]
+		}
+		\let\proof\@proof
+		\begin{flushleft}
+		{\bfseries #1 \csname the#1\endcsname}{\expl@in}{\bfseries .}
+		\begingroup
+		\fi
+	}
+	{%
+		\ifuse@fancythm
+		\if@isproved
+			\end{pf}
+		\else
+			\end{tcolorbox}
+			\par
+		\fi
+		\else
+		\if@isproved
+			\end{pf}
+		\else
+		\endgroup
+		\end{flushleft}
+		\fi\fi
+	}}
+	\docsvlist{Theorem,Proposition,Corollary,Lemma}
+
+	\NewDocumentEnvironment{pf}{O{}}{%
+		\ifuse@fancythm
+		\if@isproved
+			\begin{tcolorbox}[breakable, blanker, width=\textwidth, top = 6pt, bottom = 6pt,
+			    borderline north = {0.5mm}{0mm}{black},
+			    borderline south = {0.5mm}{0mm}{black}]
+		\fi
+		\begin{@pf}[#1]
+		\else
+		\begin{@pf}[#1]
+		\fi
+	}
+	{%
+		\ifuse@fancythm
+		\end{@pf}
+		\if@isproved
+			\end{tcolorbox}
+		\fi
+		\par
+		\else
+		\end{@pf}
+		\fi
+	}
+
+	\let\remark\@remark
+	\let\endremark\end@remark
+	\let\counterexample\@counter
+	\let\endcounterexample\end@counter
+
+
+\NewDocumentEnvironment{definition}{o}{\begin{defin}[#1]}{\end{defin}}
+\NewDocumentEnvironment{theorem}{o}{\begin{Theorem}[#1]}{\end{Theorem}}
+\NewDocumentEnvironment{proposition}{o}{\begin{Proposition}[#1]}{\end{Proposition}}
+\NewDocumentEnvironment{corollary}{o}{\begin{Corollary}[#1]}{\end{Corollary}}
+\NewDocumentEnvironment{thm}{o}{\begin{Theorem}[#1]}{\end{Theorem}}
+\NewDocumentEnvironment{prop}{o}{\begin{Proposition}[#1]}{\end{Proposition}}
+\NewDocumentEnvironment{coro}{o}{\begin{Corollary}[#1]}{\end{Corollary}}
+\NewDocumentEnvironment{lemma}{o}{\begin{Lemma}[#1]}{\end{Lemma}}
+\NewDocumentEnvironment{proof}{o}{\begin{pf}[#1]}{\end{pf}}
+\ExplSyntaxOn
