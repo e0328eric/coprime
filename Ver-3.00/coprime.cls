@@ -291,6 +291,12 @@
 \bool_if:NTF \g_tikz_bool {\use@tikztrue} {\use@tikzfalse}
 \bool_if:NTF \g_tcolorbox_bool {\use@tcolorboxtrue} {\use@tcolorboxfalse}
 
+\seq_new:N \seq_Tikz_Setup
+\seq_set_split:Nnn \seq_Tikz_Setup {,} {intersections, calc, positioning, patterns, arrows.meta, decorations.markings}
+\NewDocumentCommand{\settikz}{m}{%
+    \seq_put_right:Nn \seq_Tikz_Setup {#1}
+}
+
 \ExplSyntaxOff
 \ifuse@tikz
 	\RequirePackage{tikz, tikz-3dplot, tikz-cd}
