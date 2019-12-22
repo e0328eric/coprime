@@ -76,7 +76,7 @@
 %
 %% Ver 3.00 : 19/10/24 --- Huge Updates!
 %% Ver 3.01 : 19/11/06 --- Change latex engine to run coprime. XeTeX and LuaTeX works.
-%% Ver 3.02 : 19/12/22 --- Add luaotfload and luacode packages
+%% Ver 3.02 : 19/12/22 --- Add luaotfload and luacode packages and fix some minor bug
 
 %===============================================================================================================
 
@@ -290,6 +290,7 @@
         }
             \RequirePackage[\tl_use:N \tl_Hyperlink_Setup]{hyperref}
             \RequirePackage{cleveref}
+            \RequirePackage{fancythm}
 }
 %Tikz
 \newif\ifuse@tikz
@@ -363,7 +364,6 @@
 % Fancythm
 %\bool_if:NT \g_fancythm_bool
 %{
-    \RequirePackage{fancythm}
 %}
 
 
@@ -592,6 +592,7 @@
         }
         {%
             \RequirePackage{cleveref}
+            \RequirePackage{fancythm}
         }
     \renewcommand{\baselinestretch}{\fp_use:N \baseline_fp}
 	\setlength{\parindent}{\parindent_dim}

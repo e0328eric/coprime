@@ -79,7 +79,6 @@
 	\DMO{\nullint}{\scalerel*[0.1pt]{\phantom{|}}{\int}}
 	\newcommand{\upint}{\overline{\int}\hskip-1.5pt\nullint}
 	\newcommand{\lowint}{\underline{\int}\hskip-1.5pt\nullint}
-	\RequirePackage{bbm}
 	\let\oldemptyset\emptyset
 	\let\emptyset\varnothing
     }
@@ -103,7 +102,7 @@
 	\DMO{\nullint}{\scalerel*[0.1pt]{\phantom{|}}{\int}}
 	\newcommand{\upint}{\overline{\int}\hskip-1.5pt\nullint}
 	\newcommand{\lowint}{\underline{\int}\hskip-1.5pt\nullint}
-	\RequirePackage{mathrsfs, euscript, dsfont}
+	\RequirePackage{mathrsfs, euscript}
 	\let\oldemptyset\emptyset
 	\let\emptyset\varnothing
     }
@@ -149,15 +148,7 @@
 \newcommand{\scr}[1]{\mathscr{#1}}
 \renewcommand{\cal}[1]{\mathcal{#1}}
 \renewcommand{\frak}[1]{\mathfrak{#1}}
-\newcommand{\bbb}[1]{%
-    \bool_if:NTF \g_stix_math_bool
-    {%
-	\mathbb{#1}
-    }
-    {%
-	\mathbbm{#1}
-    }
-}
+\newcommand{\bbb}[1]{\mathbb{#1}}
 
 % Define Simple Font Load
 \def\do#1{%
