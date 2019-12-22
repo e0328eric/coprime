@@ -27,6 +27,7 @@
 \RequirePackage[many]{tcolorbox}
 \RequirePackage{etoolbox}
 \RequirePackage{varwidth}
+\RequirePackage{cleveref}
 
 %% Main Stuff
 % Undefine the previous theorems
@@ -72,20 +73,8 @@
 		\setcounter{#1}{0}
 		\@namedef{the#1}{\arabic{section}.\arabic{#1}}
 	}
-	\@ifundefined{crefname}
-	{
-		\relax
-	}
-	{
-		\crefname{#1}{\lowercase{#1}}{\lowercase{#1}}
-	}
-	\@ifundefined{Crefname}
-	{
-		\relax
-	}
-	{
-		\Crefname{#1}{#1}{#1}
-	}
+	\crefname{#1}{\lowercase{#1}}{\lowercase{#1}}
+	\Crefname{#1}{#1}{#1}
 }
 \docsvlist{Definition,Theorem,Proposition,Corollary,Lemma}
 

@@ -289,8 +289,11 @@
                 {Add~'hyperlink'~option~to~use~this~command}
         }
             \RequirePackage[\tl_use:N \tl_Hyperlink_Setup]{hyperref}
-            \RequirePackage{cleveref}
             \RequirePackage{fancythm}
+}
+\bool_if:NF \g_hyperlink_bool
+{%
+    \RequirePackage{fancythm}
 }
 %Tikz
 \newif\ifuse@tikz
@@ -360,12 +363,6 @@
             {Add~'multicol'~option~to~use~this~command}
     }
 }
-
-% Fancythm
-%\bool_if:NT \g_fancythm_bool
-%{
-%}
-
 
 % Font Settings
 \newcommand\nano{\fontsize{0.454\font_size_dim}{1.3em}\selectfont}
@@ -579,7 +576,7 @@
                     }
                 }
         }
-	\bool_if:NTF \g_hyperlink_bool
+	\bool_if:NT \g_hyperlink_bool
         {%
             \bool_if:NF \g_hyperlink_used_bool
             {%
@@ -589,10 +586,6 @@
                         Useage~:~\protect\sethyperlink{options~of~hyperref~package}
                     }
             }
-        }
-        {%
-            \RequirePackage{cleveref}
-            \RequirePackage{fancythm}
         }
     \renewcommand{\baselinestretch}{\fp_use:N \baseline_fp}
 	\setlength{\parindent}{\parindent_dim}
