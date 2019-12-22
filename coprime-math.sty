@@ -8,6 +8,7 @@
 %% Ver 1.00 : 19/09/28 --- To manage simply, this package was made
 %% Ver 1.01 : 19/11/06 --- Both XeTeX and LuaTeX can be used
 %% Ver 1.02 : 19/11/25 --- Fix \Matrix bug and change its definition
+%% Ver 1.03 : 19/12/22 --- Change fonts definition
 
 %%================================================================================================================
 
@@ -78,7 +79,7 @@
 	\DMO{\nullint}{\scalerel*[0.1pt]{\phantom{|}}{\int}}
 	\newcommand{\upint}{\overline{\int}\hskip-1.5pt\nullint}
 	\newcommand{\lowint}{\underline{\int}\hskip-1.5pt\nullint}
-	\RequirePackage{dsfont}
+	\RequirePackage{bbm}
 	\let\oldemptyset\emptyset
 	\let\emptyset\varnothing
     }
@@ -133,33 +134,28 @@
 \newcommand{\contradiction}{\ifmmode(\downzigzagarrow)\else$(\downzigzagarrow)$\fi}
 
 % Math Font Commands
-\protected\def\rm#1{\ifmmode\mathrm{#1}\else\textrm{#1}\fi}
-\protected\def\sf#1{\ifmmode\mathsf{#1}\else\textsf{#1}\fi}
-\protected\def\tt#1{\ifmmode\mathtt{#1}\else\texttt{#1}\fi}
-\protected\def\bf#1{\ifmmode\mathbf{#1}\else\textbf{#1}\fi}
-\protected\def\md#1{\ifmmode\text{\mdseries #1}\else{\mdseries #1}\fi}
-\protected\def\lf#1{\ifmmode\text{\lfseries #1}\else{\lfseries #1}\fi}
-\protected\def\it#1{\ifmmode\text{\itshape #1}\else{\itshape #1}\fi}
-\protected\def\up#1{\ifmmode\text{\upshape #1}\else{\upshape #1}\fi}
-\protected\def\sl#1{\ifmmode\text{\slshape #1}\else{\slshape #1}\fi}
-\protected\def\sc#1{\ifmmode\text{\scshape #1}\else{\scshape #1}\fi}
+\let\rm\rmfamily
+\let\sf\sffamily
+\let\tt\ttfamily
+\let\bf\bfseries
+\let\md\mdseries
+\let\lf\lfseries
+\let\it\itshape
+\let\up\upshape
+\let\sl\slshape
+\let\sc\scshape
 
 \newcommand{\es}[1]{\EuScript{#1}}
 \newcommand{\scr}[1]{\mathscr{#1}}
 \renewcommand{\cal}[1]{\mathcal{#1}}
 \renewcommand{\frak}[1]{\mathfrak{#1}}
-\newcommand{\ds}[1]{\mathds{#1}}
 \newcommand{\bbb}[1]{%
     \bool_if:NTF \g_stix_math_bool
     {%
 	\mathbb{#1}
     }
     {%
-	\ifx 1#1
-	    \ds{1}
-	\else
-	    \mathbb{#1}
-	\fi
+	\mathbbb{#1}
     }
 }
 

@@ -1,6 +1,6 @@
 %%==============================================================================================================
 
-%% This class has a copywrite to Coprime --- Ver : 3.01
+%% This class has a copywrite to Coprime --- Ver : 3.02
 %% Email Address : almagest0328@gmail.com
 %% Encoded by UTF-8
 %
@@ -76,16 +76,17 @@
 %
 %% Ver 3.00 : 19/10/24 --- Huge Updates!
 %% Ver 3.01 : 19/11/06 --- Change latex engine to run coprime. XeTeX and LuaTeX works.
+%% Ver 3.02 : 19/12/22 --- Add luaotfload and luacode packages
 
 %===============================================================================================================
 
 % LaTeX Format and Define Class Name
 \NeedsTeXFormat{LaTeX2e}
 \RequirePackage{expl3, xparse, l3keys2e}
-\ProvidesExplClass {coprime} {2019/11/06} {3.01} {Copywrite to Coprime}
+\ProvidesExplClass {coprime} {2019/12/22} {3.02} {Copywrite to Coprime}
 
 % Define Version Constant
-\tl_const:Nn \c__current_version_tl {3.01}
+\tl_const:Nn \c__current_version_tl {3.02}
 
 %Declare Booleans
 \bool_new:N \g_custom_titlepage_bool
@@ -211,6 +212,12 @@
 \RequirePackage{graphicx}
 \RequirePackage{fancyhdr}
 \RequirePackage{xcolor}
+
+\sys_if_engine_luatex:T
+{
+    \RequirePackage{luaotfload}
+    \RequirePackage{luacode}
+}
 
 
 %Korean Usepackage
