@@ -8,14 +8,13 @@
 %% Ver 1.00 : 19/09/28 --- To manage simply, this package was made
 %% Ver 1.01 : 19/11/06 --- Both XeTeX and LuaTeX can be used
 %% Ver 1.02 : 19/11/25 --- Fix \Matrix bug and change its definition
-%% Ver 1.03 : 19/12/22 --- Change fonts definition
 
 %%================================================================================================================
 
 % LaTeX Format and Define a Package Name
 \NeedsTeXFormat{LaTeX2e}
 \RequirePackage{expl3, xparse, l3keys2e}
-\ProvidesExplPackage {coprime-math} {2019/11/06} {1.01} {Copywrite to Coprime}
+\ProvidesExplPackage {coprime-math} {2019/11/25} {1.02} {Copywrite to Coprime}
 
 % Declare Options
 \keys_define:nn {coprime-math-options}
@@ -133,16 +132,16 @@
 \newcommand{\contradiction}{\ifmmode(\downzigzagarrow)\else$(\downzigzagarrow)$\fi}
 
 % Math Font Commands
-\let\rm\rmfamily
-\let\sf\sffamily
-\let\tt\ttfamily
-\let\bf\bfseries
-\let\md\mdseries
-\let\lf\lfseries
-\let\it\itshape
-\let\up\upshape
-\let\sl\slshape
-\let\sc\scshape
+\def\rm#1{\ifmmode\mathrm{#1}\else\textrm{#1}\fi}
+\def\sf#1{\ifmmode\mathsf{#1}\else\textsf{#1}\fi}
+\def\tt#1{\ifmmode\mathtt{#1}\else\texttt{#1}\fi}
+\def\bf#1{\ifmmode\mathbf{#1}\else\textbf{#1}\fi}
+\def\md#1{\ifmmode\mathmd{#1}\else\textmd{#1}\fi}
+\def\lf#1{\ifmmode\mathlf{#1}\else\textlf{#1}\fi}
+\def\it#1{\ifmmode\mathit{#1}\else\textit{#1}\fi}
+\def\up#1{\ifmmode\mathup{#1}\else\textup{#1}\fi}
+\def\sl#1{\ifmmode\mathsl{#1}\else\textsl{#1}\fi}
+\def\sc#1{\ifmmode\mathsc{#1}\else\textsc{#1}\fi}
 
 \newcommand{\es}[1]{\EuScript{#1}}
 \newcommand{\scr}[1]{\mathscr{#1}}
