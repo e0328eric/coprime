@@ -8,13 +8,14 @@
 %% Ver 1.00 : 19/09/28 --- To manage simply, this package was made
 %% Ver 1.01 : 19/11/06 --- Both XeTeX and LuaTeX can be used
 %% Ver 1.02 : 19/11/25 --- Fix \Matrix bug and change its definition
+%% Ver 1.03 : 20/01/02 --- Fix \proved command
 
 %%================================================================================================================
 
 % LaTeX Format and Define a Package Name
 \NeedsTeXFormat{LaTeX2e}
 \RequirePackage{expl3, xparse, l3keys2e}
-\ProvidesExplPackage {coprime-math} {2019/11/25} {1.02} {Copywrite to Coprime}
+\ProvidesExplPackage {coprime-math} {2020/01/02} {1.03} {Copywrite to Coprime}
 
 % Declare Options
 \keys_define:nn {coprime-math-options}
@@ -40,7 +41,6 @@
 \RequirePackage{mathtools}
 \RequirePackage{scalerel}
 \RequirePackage{fouridx}
-\RequirePackage{centernot}
 \RequirePackage{relsize}
 \RequirePackage{etoolbox}
 
@@ -108,9 +108,20 @@
 }
 
 \newcommand{\cl}[1]{\overline{#1}}
-\newcommand{\@proved}{\ifmmode \tag*{$\Box$}\else\null\hfill $\Box$\fi}
-\newcommand{\@@proved}{\ifmmode \tag*{$\blacksquare$}\else\null\hfill $\blacksquare$\fi}
-\newcommand{\@@@proved}{\ifmmode \tag*{$\blacklozenge$}\else\null\hfill $\blacklozenge$\fi}
+
+% Proved Box
+\def\@pr@vedb@x{$\Box$}
+\def\@@pr@vedb@x{$\blacksquare$}
+\def\@@@pr@vedb@x{$\blacklozenge$}
+\def\pr@vedb@xfancy#1{{\unskip\nobreak\hfil\penalty50
+	\hfil\hbox{}\nobreak\hfil#1
+	\parfillskip=0pt \finalhyphendemerits=0 \par}}
+\def\@pr@ved{\pr@vedb@xfancy\@pr@vedb@x}
+\def\@@pr@ved{\pr@vedb@xfancy\@@pr@vedb@x}
+\def\@@@pr@ved{\pr@vedb@xfancy\@@@pr@vedb@x}
+\newcommand{\@proved}{\ifmmode\tag*{\@pr@vedb@x}\else\@pr@ved\fi}
+\newcommand{\@@proved}{\ifmmode\tag*{\@@pr@vedb@x}\else\@@pr@ved\fi}
+\newcommand{\@@@proved}{\ifmmode\tag*{\@@@pr@vedb@x}\else\@@@pr@ved\fi}
 \NewDocumentCommand{\proved}{ss}
 {%
     \IfBooleanTF{#1}
@@ -162,25 +173,6 @@
 % Define the set of the number system
 \let\N\Nb \let\Z\Zb \let\Q\Qb \let\R\Rb \let\@C\Cb
 
-% Redefine the \not command
-\tl_new:N \l_is_not_endmath_tl
-\sys_if_engine_pdftex:T
-{%
-    \let\oldnot\not
-    \newcommand{\nulln@t}{\oldnot\null}
-    \newcommand{\n@t}[1]{%
-	\tl_set:Nn \l_is_not_endmath_tl {#1}
-	\tl_if_in:NnTF \l_is_not_endmath_tl {^^24}
-	{%
-	    \nulln@t^^24
-	}
-	{%
-	    \centernot{#1}
-	}
-    }
-    \let\not\n@t
-}
-
 % Define the \Matrix command
 \tl_new:N \l_change_cs_tl
 \tl_new:N \l_type_matrix_tl
@@ -217,7 +209,7 @@
 	}
 	{%
 	    \tl_put_right:Nn \l_type_matrix_tl {matrix}
-	    \begin{\tl_use:N \l_type_matrix_tl}\
+	    \begin{\tl_use:N \l_type_matrix_tl}
 		\tl_use:N \l_change_cs_tl
 	    \end{\tl_use:N \l_type_matrix_tl}
 	}
@@ -274,5 +266,11 @@
 \def\defeq{\coloneqq}
 \let\normaleq\trianglelefteq
 \let\normal\vartriangleleft
-\let\oldC\C
-\let\C\@C
+\sys_if_engine_luatex:TF
+{
+    \relax
+}
+{
+    \let\oldC\C
+    \let\C\@C
+}

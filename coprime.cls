@@ -147,7 +147,6 @@
     nobreak .bool_set:N = \g_nobreak_bool,
     stix .bool_set:N = \g_stix_bool,
     table .bool_set:N = \g_table_bool,
-    tcolorbox .bool_set:N = \g_tcolorbox_bool,
     tikz .bool_set:N = \g_tikz_bool,
     twoside .bool_set:N = \g_twoside_bool,
     version .tl_set:N = \c__edited_version_tl,
@@ -224,6 +223,10 @@
 \bool_if:NT \g_korean_bool
 {%
     \RequirePackage{kotex}
+    \sys_if_engine_pdftex:F
+    {
+        \setmainhangulfont{NanumMyeongjo}
+    }
 }
 
 
@@ -297,28 +300,11 @@
 }
 %Tikz
 \newif\ifuse@tikz
-\newif\ifuse@tcolorbox
-
 \bool_if:NTF \g_tikz_bool {\use@tikztrue} {\use@tikzfalse}
-\bool_if:NTF \g_tcolorbox_bool {\use@tcolorboxtrue} {\use@tcolorboxfalse}
-
-\seq_new:N \seq_Tikz_Setup
-\seq_set_split:Nnn \seq_Tikz_Setup {,} {intersections, calc, positioning, patterns, arrows.meta, decorations.markings}
-\NewDocumentCommand{\settikz}{m}{%
-    \seq_put_right:Nn \seq_Tikz_Setup {#1}
-}
-
 \ExplSyntaxOff
 \ifuse@tikz
 	\RequirePackage{tikz, tikz-3dplot, tikz-cd}
         \usetikzlibrary{intersections, calc, positioning, patterns, arrows.meta, decorations.markings}
-\fi
-
-%Tcolorbox
-\ifuse@tcolorbox
-	\RequirePackage{tikz, tikz-3dplot, tikz-cd}
-        \usetikzlibrary{intersections, calc, positioning, patterns, arrows.meta, decorations.markings}
-	\RequirePackage[many]{tcolorbox}
 \fi
 \ExplSyntaxOn
 
@@ -458,7 +444,7 @@
 	\bool_set_true:N \g_foot_edit_bool
 }
 
-\NewDocumentCommand{\editheadfoot}{s}{%
+\NewDocumentCommand{\defaultheadfoot}{s}{%
 	\bool_if:NTF \g_twoside_bool
     {%
         \bool_if:NTF \g_title_author_empty_bool
@@ -508,6 +494,7 @@
     }
     \IfBooleanTF{#1}{\thispagestyle{fancy}}{\pagestyle{fancy}}
 }
+\def\restoreheadfoot{\defaultheadfoot}
 
 %% Start coprime
 % Define \settitle and \setlength commands
@@ -592,7 +579,7 @@
 	\title{\vspace*{-20pt}\bf{\textsc{\fontsize{1.3\font_size_dim}{1.2em}\selectfont\tl_use:N \title_tl}}\vspace{-7pt}}
 	\author{\tl_use:N \author_tl}
 	\date{\tl_use:N \date_tl}
-	\editheadfoot
+	\defaultheadfoot
 	\setlength{\headheight}{20pt}
 	\setlength{\headsep}{15pt}
 	\bool_if:NF \g_custom_titlepage_bool
@@ -603,6 +590,10 @@
         }
     }
 	\fontsize{\font_size_dim}{1.3em}\selectfont
+        \sys_if_engine_luatex:T
+        {
+            \def\C{\Cb}
+        }
 }
 
 \AtEndDocument{%
