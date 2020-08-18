@@ -1,4 +1,4 @@
-%%==============================================================================================================
+%%=====================================================================================
 
 %% This class has a copywrite to Coprime --- Ver : 3.02
 %% Email Address : almagest0328@gmail.com
@@ -78,7 +78,7 @@
 %% Ver 3.01 : 19/11/06 --- Change latex engine to run coprime. XeTeX and LuaTeX works.
 %% Ver 3.02 : 19/12/22 --- Add luaotfload and luacode packages and fix some minor bug
 
-%===============================================================================================================
+%======================================================================================
 
 % LaTeX Format and Define Class Name
 \NeedsTeXFormat{LaTeX2e}
@@ -127,10 +127,6 @@
 {
     \cs_new:cn
 }
-
-%Ignore Badboxes
-\hbadness=10000
-\hfuzz=1000pt
 
 %Declare Options
 \keys_define:nn {coprime-main-options}
