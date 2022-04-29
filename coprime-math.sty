@@ -114,7 +114,7 @@
 \def\@@pr@vedb@x{$\blacksquare$}
 \def\@@@pr@vedb@x{$\blacklozenge$}
 \def\pr@vedb@xfancy#1{{\unskip\nobreak\hfil\penalty50
-	\hfil\hbox{}\nobreak\hfil#1
+	\hfil\phantom{#1}\nobreak\hfil#1
 	\parfillskip=0pt \finalhyphendemerits=0 \par}}
 \def\@pr@ved{\pr@vedb@xfancy\@pr@vedb@x}
 \def\@@pr@ved{\pr@vedb@xfancy\@@pr@vedb@x}
@@ -173,6 +173,8 @@
 
 % Define the set of the number system
 \let\N\Nb \let\Z\Zb \let\Q\Qb \let\R\Rb \let\@C\Cb
+
+\def\lcm{\mathop{\mathrm{lcm}}}
 
 % Define the \Matrix command
 \tl_new:N \l_change_cs_tl

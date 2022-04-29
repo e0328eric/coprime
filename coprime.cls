@@ -131,7 +131,7 @@
 %Declare Options
 \keys_define:nn {coprime-main-options}
 {
-    %fancythm .bool_set:N = \g_fancythm_bool,
+    fancythm .bool_set:N = \g_fancythm_bool,
     fontsize .code:n = {\dim_set:Nn \font_size_dim {#1}},
     fontsize .default:n = 11pt,
     geometry .bool_set:N = \g_geometry_bool,
@@ -225,22 +225,27 @@
     }
 }
 
+\bool_if:NT \g_fancythm_bool
+{%
+    \RequirePackage{fancythm}
+}
+
 
 %Item Option
 \bool_if:NT \g_item_bool
-	{%
-		\RequirePackage{outlines}
-		\RequirePackage{enumitem}
-	}
+{%
+    \RequirePackage{outlines}
+    \RequirePackage{enumitem}
+}
 
 %Table Option
 \bool_if:NT \g_table_bool
-	{%
-		\RequirePackage{longtable}
-		\RequirePackage{multirow}
-		\RequirePackage{array}
-		\RequirePackage{hhline}
-	}
+{%
+    \RequirePackage{longtable}
+    \RequirePackage{multirow}
+    \RequirePackage{array}
+    \RequirePackage{hhline}
+}
 
 %Setting Geometry
 \tl_set:Nn \tl_Margin_Setup {a4paper, margin = 1.3in, includeheadfoot, footskip = .4in}
