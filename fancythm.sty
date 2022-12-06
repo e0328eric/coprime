@@ -8,13 +8,14 @@
 %% Ver 1.00 : 19/09/28 --- To manage simply, this package was made
 %% Ver 1.01 : 19/11/25 --- Delete cleveref package so that fix a bug of coprime.cls
 %% Ver 2.00 : 22/04/01 --- Remove tcolorbox package to make theorems more simple and cleaner
+%% Ver 2.01 : 22/12/06 --- Fix `proof` environment fancy form
 
 %%================================================================================================================
 
 % LaTeX Format and Define a Package Name
 \NeedsTeXFormat{LaTeX2e}
 \RequirePackage{expl3, xparse, l3keys2e}
-\ProvidesExplPackage {fancythm} {2022/04/01} {2.00} {Copywrite to Coprime}
+\ProvidesExplPackage {fancythm} {2022/12/06} {2.01} {Copywrite to Coprime}
 
 % Declare Options
 \keys_define:nn {fancythm-options}
@@ -187,6 +188,7 @@
 
 \NewDocumentEnvironment{pf}{O{}}{%
 	\ifuse@fancythm
+    \par\hbox to\hsize{\xleaders\hbox to.8em{\hss-\hss}\hfill}
 	\begin{@pf}[#1]
 	\else
 	\begin{@pf}[#1]
@@ -195,6 +197,7 @@
 {%
 	\ifuse@fancythm
 	\end{@pf}
+    \par\hbox to\hsize{\xleaders\hbox to.8em{\hss-\hss}\hfill}
 	\par
 	\else
 	\end{@pf}
