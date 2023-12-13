@@ -183,13 +183,7 @@
 \NewDocumentCommand{\Matrix}{soom}{%
     \tl_set:Nn \l_change_cs_tl {#4}
     \tl_replace_all:Nnn \l_change_cs_tl {,} {&}
-    \sys_if_engine_xetex:TF
-    {%
-	\tl_replace_all:Nnn \l_change_cs_tl {;} {\\[6pt]}
-    }
-    {%
 	\tl_replace_all:Nnn \l_change_cs_tl {;} {\\}
-    }
     \IfNoValueTF{#3}
     {%
 	\IfNoValueTF{#2}
@@ -205,7 +199,7 @@
 	}
 	\IfBooleanTF{#1}
 	{%
-	    \tl_put_right:Nn \l_type_matrix_tl {smallmatrix}
+	    \tl_put_right:Nn \l_type_matrix_tl {smallmatrix*}
 	    \begin{\tl_use:N \l_type_matrix_tl}[c]
 		\tl_use:N \l_change_cs_tl
 	    \end{\tl_use:N \l_type_matrix_tl}
