@@ -50,43 +50,43 @@
 %
 %% Ver 3.30b : 18/12/15 --- Make a new command : \Matrix
 %
-%% Ver 0.00 : 18/12/19 --- Change the class with LaTeX3 Language. Class name is changed and fancythm fixed
-%% Ver 0.01 : 18/12/29 --- Add stix2-type 1 font, delete mathabx font
-%% Ver 0.02 : 19/01/05 --- Fixed \usegeometry, \setbabel and \sethyperlink issues
+%% Ver 0.0.0 : 18/12/19 --- Change the class with LaTeX3 Language. Class name is changed and fancythm fixed
+%% Ver 0.0.1 : 18/12/29 --- Add stix2-type 1 font, delete mathabx font
+%% Ver 0.0.2 : 19/01/05 --- Fixed \usegeometry, \setbabel and \sethyperlink issues
 %
-%% Ver 0.10 : 19/01/21 --- Can be used in LuaTeX but not XeTeX
-%% Ver 0.11 : 19/01/23 --- Fix the issue when using hyperlink option
-%% Ver 0.12 : 19/02/22 --- Edit the \Matrix command
+%% Ver 0.1.0 : 19/01/21 --- Can be used in LuaTeX but not XeTeX
+%% Ver 0.1.1 : 19/01/23 --- Fix the issue when using hyperlink option
+%% Ver 0.1.2 : 19/02/22 --- Edit the \Matrix command
 %
-%% Ver 1.00 : 19/02/25 --- Major Update!
+%% Ver 1.0.0 : 19/02/25 --- Major Update!
 %
-%% Ver 1.10 : 19/02/28 --- Make the titlepage
-%% Ver 1.11 : 19/03/06 --- Fix bugs.
-%% Ver 1.12 : 19/03/15 --- Delete hangul and hanja options
+%% Ver 1.1.0 : 19/02/28 --- Make the titlepage
+%% Ver 1.1.1 : 19/03/06 --- Fix bugs.
+%% Ver 1.1.2 : 19/03/15 --- Delete hangul and hanja options
 %
-%% Ver 1.20 : 19/03/17 --- Add reference environment to use bibtex easely
-%% Ver 1.21 : 19/03/22 --- Fix the bug when .bib file made although the reference environment
-%	        	   does not active and change the default code of \Matrix command
-%% Ver 1.22 : 19/03/28 --- Add etoolbox package which makes command more efficiently
-%% Ver 1.23 : 19/04/16 --- Edit fancythm style
-%% Ver 1.24 : 19/06/24 --- Fix some issues of fancythm style
-%% Ver 1.25 : 19/07/20 --- Fix some issues when using LuaTeX engine
+%% Ver 1.2.0 : 19/03/17 --- Add reference environment to use bibtex easely
+%% Ver 1.2.1 : 19/03/22 --- Fix the bug when .bib file made although the reference environment
+%	      .  	   does not active and change the default code of \Matrix command
+%% Ver 1.2.2 : 19/03/28 --- Add etoolbox package which makes command more efficiently
+%% Ver 1.2.3 : 19/04/16 --- Edit fancythm style
+%% Ver 1.2.4 : 19/06/24 --- Fix some issues of fancythm style
+%% Ver 1.2.5 : 19/07/20 --- Fix some issues when using LuaTeX engine
 %
-%% Ver 2.00 : 19/07/22 --- Remake class to work well when using LuaTeX
+%% Ver 2.0.0 : 19/07/22 --- Remake class to work well when using LuaTeX
 %
-%% Ver 3.00 : 19/10/24 --- Huge Updates!
-%% Ver 3.01 : 19/11/06 --- Change latex engine to run coprime. XeTeX and LuaTeX works.
-%% Ver 3.02 : 19/12/22 --- Add luaotfload and luacode packages and fix some minor bug
+%% Ver 3.0.0 : 19/10/24 --- Huge Updates!
+%% Ver 3.0.1 : 19/11/06 --- Change latex engine to run coprime. XeTeX and LuaTeX works.
+%% Ver 3.0.2 : 19/12/22 --- Add luaotfload and luacode packages and fix some minor bug
 
 %======================================================================================
 
 % LaTeX Format and Define Class Name
 \NeedsTeXFormat{LaTeX2e}
 \RequirePackage{expl3, xparse, l3keys2e}
-\ProvidesExplClass {coprime} {2019/12/22} {3.02} {Copywrite to Coprime}
+\ProvidesExplClass {coprime} {2019/12/22} {3.0.2} {Copywrite to Coprime}
 
 % Define Version Constant
-\tl_const:Nn \c__current_version_tl {3.02}
+\tl_const:Nn \c__current_version_tl {3.0.2}
 
 %Declare Booleans
 \bool_new:N \g_custom_titlepage_bool
