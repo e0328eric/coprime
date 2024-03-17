@@ -54,6 +54,36 @@
 \newif\ifuse@@fancythm
 \newif\if@isproved
 
+% Proved Box
+\def\@pr@vedb@x{$\Box$}
+\def\@@pr@vedb@x{$\blacksquare$}
+\def\@@@pr@vedb@x{$\blacklozenge$}
+\def\pr@vedb@xfancy#1{{\unskip\nobreak\hfil\penalty50
+	\hfil\phantom{#1}\nobreak\hfil#1
+	\parfillskip=0pt \finalhyphendemerits=0 \par}}
+\def\@pr@ved{\pr@vedb@xfancy\@pr@vedb@x}
+\def\@@pr@ved{\pr@vedb@xfancy\@@pr@vedb@x}
+\def\@@@pr@ved{\pr@vedb@xfancy\@@@pr@vedb@x}
+\newcommand{\@proved}{\ifmmode\tag*{\@pr@vedb@x}\else\@pr@ved\fi}
+\newcommand{\@@proved}{\ifmmode\tag*{\@@pr@vedb@x}\else\@@pr@ved\fi}
+\newcommand{\@@@proved}{\ifmmode\tag*{\@@@pr@vedb@x}\else\@@@pr@ved\fi}
+\NewDocumentCommand{\proved}{ss}
+{%
+    \IfBooleanTF{#1}
+    {%
+	\IfBooleanTF{#2}
+	{%
+	    \@@@proved
+	}
+	{%
+	    \@@proved
+	}
+    }
+    {%
+	\@proved
+    }
+}
+
 % \fancyon and \fancyoff commands
 \def\fancyon{\use@fancythmtrue}
 \def\fancyoff{\use@fancythmfalse}

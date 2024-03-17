@@ -109,35 +109,6 @@
 
 \newcommand{\cl}[1]{\overline{#1}}
 
-% Proved Box
-\def\@pr@vedb@x{$\Box$}
-\def\@@pr@vedb@x{$\blacksquare$}
-\def\@@@pr@vedb@x{$\blacklozenge$}
-\def\pr@vedb@xfancy#1{{\unskip\nobreak\hfil\penalty50
-	\hfil\phantom{#1}\nobreak\hfil#1
-	\parfillskip=0pt \finalhyphendemerits=0 \par}}
-\def\@pr@ved{\pr@vedb@xfancy\@pr@vedb@x}
-\def\@@pr@ved{\pr@vedb@xfancy\@@pr@vedb@x}
-\def\@@@pr@ved{\pr@vedb@xfancy\@@@pr@vedb@x}
-\newcommand{\@proved}{\ifmmode\tag*{\@pr@vedb@x}\else\@pr@ved\fi}
-\newcommand{\@@proved}{\ifmmode\tag*{\@@pr@vedb@x}\else\@@pr@ved\fi}
-\newcommand{\@@@proved}{\ifmmode\tag*{\@@@pr@vedb@x}\else\@@@pr@ved\fi}
-\NewDocumentCommand{\proved}{ss}
-{%
-    \IfBooleanTF{#1}
-    {%
-	\IfBooleanTF{#2}
-	{%
-	    \@@@proved
-	}
-	{%
-	    \@@proved
-	}
-    }
-    {%
-	\@proved
-    }
-}
 \let\oldcomplement\complement
 \renewcommand{\complement}[1]{{#1}^{\mathsf{c}}}
 \newcommand{\comp}[1]{{#1}^{\mathsf{c}}}
