@@ -140,15 +140,18 @@
 
 % NOTE: stolen from
 % https://tex.stackexchange.com/questions/759/average-integral-symbol#760
-\def\Xint#1{\mathchoice
-{\XXint\displaystyle\textstyle{#1}}%
-{\XXint\textstyle\scriptstyle{#1}}%
-{\XXint\scriptstyle\scriptscriptstyle{#1}}%
-{\XXint\scriptscriptstyle\scriptscriptstyle{#1}}%
-\!\int}
-\def\XXint#1#2#3{{\setbox0=\hbox{$#1{#2#3}{\int}$ }
-\vcenter{\hbox{$#2#3$ }}\kern-.58\wd0}}
-\def\barint{\Xint-}
+\bool_if:NF \g_stix_math_bool
+{
+    \def\Xint#1{\mathchoice
+    {\XXint\displaystyle\textstyle{#1}}%
+    {\XXint\textstyle\scriptstyle{#1}}%
+    {\XXint\scriptstyle\scriptscriptstyle{#1}}%
+    {\XXint\scriptscriptstyle\scriptscriptstyle{#1}}%
+    \!\int}
+    \def\XXint#1#2#3{{\setbox0=\hbox{$#1{#2#3}{\int}$ }
+    \vcenter{\hbox{$#2#3$ }}\kern-.49\wd0}}
+    \def\barint{\Xint-}
+}
 
 % Define Simple Font Load
 \def\do#1{%
