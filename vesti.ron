@@ -1,10 +1,10 @@
-Package(
+VestiModule(
     name: "coprime",
     version: Some("3.0.2"),
-    exports: Some([
+    exports: [
         "coprime-math.sty",
         "coprime-reference.sty",
         "coprime.cls",
         "fancythm.sty",
-    ]),
+    ],
 )
