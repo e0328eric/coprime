@@ -1,6 +1,6 @@
 %%================================================================================================================
 
-%% This package has a copywrite to Coprime --- Ver 1.01
+%% This package has a copywrite to Coprime --- Ver 3.00
 %% Email Address : almagest0328@gmail.com
 %
 %% fancythm Package, First Release Date : 2019/09/28
@@ -16,7 +16,7 @@
 % LaTeX Format and Define a Package Name
 \NeedsTeXFormat{LaTeX2e}
 \RequirePackage{expl3, xparse, l3keys2e}
-\ProvidesExplPackage {fancythm} {2022/12/06} {2.01} {Copywrite to Coprime}
+\ProvidesExplPackage {fancythm} {2024/11/01} {3.00} {Copywrite to Coprime}
 
 % Import tcolorbox and etoolbox packages
 \RequirePackage{amsthm}
@@ -85,17 +85,12 @@
 \def\counterprefix#1{\@counterprefix{#1}}
 
 \newcounter{coprimeThmboxcnt}[subsection]\setcounter{coprimeThmboxcnt}{0}
+\def\allocthmcnt#1{\newaliascnt{#1}{coprimeThmboxcnt}%
+\@namedef{the#1}{\the\@counterprefix\arabic{section}.\arabic{subsection}.\arabic{coprimeThmboxcnt}}}
 
 % Dummy counters for cleveref
-\newaliascnt{coprimeDefinition}{coprimeThmboxcnt} \newaliascnt{coprimeTheorem}{coprimeThmboxcnt}
-\newaliascnt{coprimeProposition}{coprimeThmboxcnt} \newaliascnt{coprimeCorollary}{coprimeThmboxcnt}
-\newaliascnt{coprimeLemma}{coprimeThmboxcnt}
-
-\@namedef{thecoprimeDefinition}{\the\@counterprefix\arabic{section}.\arabic{subsection}.\arabic{coprimeThmboxcnt}}
-\@namedef{thecoprimeTheorem}{\the\@counterprefix\arabic{section}.\arabic{subsection}.\arabic{coprimeThmboxcnt}}
-\@namedef{thecoprimeProposition}{\the\@counterprefix\arabic{section}.\arabic{subsection}.\arabic{coprimeThmboxcnt}}
-\@namedef{thecoprimeCorollary}{\the\@counterprefix\arabic{section}.\arabic{subsection}.\arabic{coprimeThmboxcnt}}
-\@namedef{thecoprimeLemma}{\the\@counterprefix\arabic{section}.\arabic{subsection}.\arabic{coprimeThmboxcnt}}
+\allocthmcnt{coprimeDefinition} \allocthmcnt{coprimeTheorem}
+\allocthmcnt{coprimeProposition} \allocthmcnt{coprimeCorollary} \allocthmcnt{coprimeLemma}
 
 \crefname{coprimeDefinition}{\lowercase{Definition}}{\lowercase{Definition}}
 \Crefname{coprimeDefinition}{Definition}{Definition}
