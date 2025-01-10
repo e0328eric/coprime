@@ -219,10 +219,10 @@
 \bool_if:NT \g_korean_bool
 {%
     \RequirePackage{kotex}
-    \sys_if_engine_pdftex:F
-    {
-        \setmainhangulfont{NanumMyeongjo}
-    }
+    %\sys_if_engine_pdftex:F
+    %{
+    %    \setmainhangulfont{Batang}
+    %}
 }
 
 \bool_if:NT \g_fancythm_bool
@@ -368,6 +368,9 @@
 \newcommand\giant{\fontsize{2.9090\font_size_dim}{2.028em}\selectfont}
 \newcommand\Giant{\fontsize{4.3636\font_size_dim}{2.171em}\selectfont}
 \newcommand\GIANT{\fontsize{5.8181\font_size_dim}{2.314em}\selectfont}
+
+% Undefine macros
+\def\undefined#1{\expandafter\cs_undefine:N\csname #1\endcsname}
 
 %Head and Foot
 \NewDocumentCommand{\sethead}{omomomO{0.9pt}}{%
