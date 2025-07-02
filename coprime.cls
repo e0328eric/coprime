@@ -77,16 +77,17 @@
 %% Ver 3.0.0 : 19/10/24 --- Huge Updates!
 %% Ver 3.0.1 : 19/11/06 --- Change latex engine to run coprime. XeTeX and LuaTeX works.
 %% Ver 3.0.2 : 19/12/22 --- Add luaotfload and luacode packages and fix some minor bug
+%% Ver 3.0.3 : 25/07/02 --- Change default font side to 10pt
 
 %======================================================================================
 
 % LaTeX Format and Define Class Name
 \NeedsTeXFormat{LaTeX2e}
 \RequirePackage{expl3, xparse, l3keys2e}
-\ProvidesExplClass {coprime} {2019/12/22} {3.0.2} {Copywrite to Coprime}
+\ProvidesExplClass {coprime} {2025/07/02} {3.0.3} {Copywrite to Coprime}
 
 % Define Version Constant
-\tl_const:Nn \c__current_version_tl {3.0.2}
+\tl_const:Nn \c__current_version_tl {3.0.3}
 
 %Declare Booleans
 \bool_new:N \g_custom_titlepage_bool
@@ -115,12 +116,12 @@
 }
 \dim_new:N \parindent_dim
 \dim_new:N \parskip_dim
-\dim_set:Nn \parindent_dim {11pt}
+\dim_set:Nn \parindent_dim {10pt}
 \dim_set:Nn \parskip_dim {0em}
 
 %Declare Dimention
 \dim_new:N \font_size_dim
-\dim_set:Nn \font_size_dim {11pt}
+\dim_set:Nn \font_size_dim {10pt}
 
 %Interchanging Control Sequence
 \cs_new:Npn \cop_change_commds:N #1
