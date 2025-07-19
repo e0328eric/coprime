@@ -78,13 +78,14 @@
 %% Ver 3.0.1 : 19/11/06 --- Change latex engine to run coprime. XeTeX and LuaTeX works.
 %% Ver 3.0.2 : 19/12/22 --- Add luaotfload and luacode packages and fix some minor bug
 %% Ver 3.0.3 : 25/07/02 --- Change default font side to 10pt
+%% Ver 3.0.4 : 25/07/19 --- Add new font
 
 %======================================================================================
 
 % LaTeX Format and Define Class Name
 \NeedsTeXFormat{LaTeX2e}
 \RequirePackage{expl3, xparse, l3keys2e}
-\ProvidesExplClass {coprime} {2025/07/02} {3.0.3} {Copywrite to Coprime}
+\ProvidesExplClass {coprime} {2025/07/19} {3.0.4} {Copywrite to Coprime}
 
 % Define Version Constant
 \tl_const:Nn \c__current_version_tl {3.0.3}
@@ -143,6 +144,7 @@
     multicol .bool_set:N = \g_multicol_bool,
     nobreak .bool_set:N = \g_nobreak_bool,
     stix .bool_set:N = \g_stix_bool,
+    erewhon .bool_set:N = \g_erewhon_bool,
     table .bool_set:N = \g_table_bool,
     tikz .bool_set:N = \g_tikz_bool,
     twoside .bool_set:N = \g_twoside_bool,
@@ -190,7 +192,13 @@
         \RequirePackage[nobreak,stix]{coprime-math}
     }
     {
+    \bool_if:NTF \g_erewhon_bool
+    {
+        \RequirePackage[nobreak,erewhon]{coprime-math}
+    }
+    {
         \RequirePackage[nobreak]{coprime-math}
+    }
     }
 }
 {
@@ -199,7 +207,13 @@
         \RequirePackage[stix]{coprime-math}
     }
     {
+    \bool_if:NTF \g_erewhon_bool
+    {
+        \RequirePackage[erewhon]{coprime-math}
+    }
+    {
         \RequirePackage{coprime-math}
+    }
     }
 }
 

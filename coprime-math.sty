@@ -10,19 +10,21 @@
 %% Ver 1.02 : 19/11/25 --- Fix \Matrix bug and change its definition
 %% Ver 1.03 : 20/01/02 --- Fix \proved command
 %% Ver 2.00 : 24/11/01 --- Add new symbols
+%% Ver 2.01 : 25/07/19 --- Add new font
 
 %%================================================================================================================
 
 % LaTeX Format and Define a Package Name
 \NeedsTeXFormat{LaTeX2e}
 \RequirePackage{expl3, xparse, l3keys2e}
-\ProvidesExplPackage {coprime-math} {2024/11/01} {2.00} {Copywrite to Coprime}
+\ProvidesExplPackage {coprime-math} {2025/07/19} {2.01} {Copywrite to Coprime}
 
 % Declare Options
 \keys_define:nn {coprime-math-options}
 {
     nobreak .bool_set:N = \g_nobreak_math_bool,
     stix .bool_set:N = \g_stix_math_bool,
+    erewhon .bool_set:N = \g_erewhon_math_bool,
 }
 \ProcessKeysOptions{coprime-math-options}
 
@@ -93,6 +95,17 @@
 	\renewenvironment{cases}{\left\{\begin{matrix}}{\end{matrix}\right.}
     }
     {
+    \bool_if:NTF \g_erewhon_math_bool
+    {
+	\RequirePackage{fontspec}
+	\RequirePackage{unicode-math}
+	\setmainfont{erewhon}                              % rm
+    \setsansfont{Cabin}[Scale=MatchLowercase]          % sf
+    \setmonofont{Inconsolatazi4}[Scale=MatchLowercase] % tt
+	\setmathfont{Erewhon~Math}
+	\renewenvironment{cases}{\left\{\begin{matrix}}{\end{matrix}\right.}
+    }
+    {
 	\DMO*{\bigcupdot}
 	{%
 	    \ooalign{\hfil$\displaystyle\bigcup$\hfil\cr%
@@ -105,6 +118,7 @@
 	\RequirePackage{mathrsfs, euscript}
 	\let\oldemptyset\emptyset
 	\let\emptyset\varnothing
+    }
     }
 }
 
