@@ -86,7 +86,7 @@
 
 \newcounter{coprimeThmboxcnt}[subsection]\setcounter{coprimeThmboxcnt}{0}
 \def\allocthmcnt#1{\newaliascnt{#1}{coprimeThmboxcnt}%
-\@namedef{the#1}{\the\@counterprefix\arabic{section}.\arabic{subsection}.\arabic{coprimeThmboxcnt}}}
+\@namedef{the#1}{\the\@counterprefix\arabic{section}.\arabic{subsection}.\arabic{coprimeThmboxcnt}.}}
 
 % Dummy counters for cleveref
 \allocthmcnt{coprimeDefinition} \allocthmcnt{coprimeTheorem}
@@ -131,7 +131,7 @@
 	\vskip 1.5ex
 	\hrule height 0.7pt\nobreak
 	\vskip 1.5ex
-	\noindent{#3}{\expl@in}{\bfseries .}\kern 0.5em
+	\noindent{#3}{\expl@in}\kern 0.5em
 	\def\proof{%
 		\par\hbox to\hsize{\xleaders\hbox to.8em{\hss-\hss}\hfill}
 		\noindent{\itshape proof.}\kern 1em
@@ -147,7 +147,7 @@
 	}
 	\let\proof\@proof
 	\begin{flushleft}
-	{#3}{\expl@in}{\bfseries .}
+	{#3}{\expl@in}
 	\begingroup
 	\fi
 }
