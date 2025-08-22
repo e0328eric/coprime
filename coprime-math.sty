@@ -90,8 +90,8 @@
     {
 	\RequirePackage{fontspec}
 	\RequirePackage[math-style=TeX]{unicode-math}
-	\setmainfont{STIX~Two~Text}
-	\setmathfont[StylisticSet=8]{STIX~Two~Math}
+    \setmainfont{STIX~Two~Text}[Path]
+    \setmathfonth{STIX~Two~Math}[Path,StylisticSet=8]
 	\renewenvironment{cases}{\left\{\begin{matrix}}{\end{matrix}\right.}
     }
     {
@@ -99,10 +99,10 @@
     {
 	\RequirePackage{fontspec}
 	\RequirePackage{unicode-math}
-	\setmainfont{erewhon}                              % rm
-    \setsansfont{Calibri}[Scale=MatchLowercase]        % sf
-    \setmonofont{Courier~New}[Scale=MatchLowercase] % tt
-	\setmathfont{Erewhon~Math}
+    \setmainfont{erewhon}[Path]                             % rm
+    \setsansfont{Calibri}[Path,Scale=MatchLowercase]        % sf
+    \setmonofont{Courier~New}[Path,Scale=MatchLowercase]    % tt
+    \setmathfont{Erewhon~Math}[Path]
 	\renewenvironment{cases}{\left\{\begin{matrix}}{\end{matrix}\right.}
     }
     {
