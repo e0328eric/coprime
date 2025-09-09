@@ -88,7 +88,7 @@
 \ProvidesExplClass {coprime} {2025/07/19} {3.0.4} {Copywrite to Coprime}
 
 % Define Version Constant
-\tl_const:Nn \c__current_version_tl {3.0.3}
+\tl_const:Nn \c__current_version_tl {3.0.4}
 
 %Declare Booleans
 \bool_new:N \g_custom_titlepage_bool
