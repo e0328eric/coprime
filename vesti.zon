@@ -2,9 +2,9 @@
     .name = "coprime",
     .version = "3.0.2",
     .exports = .{
-        "coprime-math.sty",
-        "coprime-reference.sty",
-        "coprime.cls",
-        "fancythm.sty",
+        .{ .name = "coprime-math.sty" },
+        .{ .name = "coprime-reference.sty" },
+        .{ .name = "coprime.cls" },
+        .{ .name = "fancythm.sty" },
     },
 }
