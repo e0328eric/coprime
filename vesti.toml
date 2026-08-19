@@ -2,10 +2,10 @@ name = "coprime"
 version = "3.0.2"
 
 [[exports]]
-name = "coprime-math.ves"
+name = "coprime-math.sty"
 
 [[exports]]
-name = "coprime-reference.ves"
+name = "coprime-reference.sty"
 
 [[exports]]
 name = "coprime.cls"
